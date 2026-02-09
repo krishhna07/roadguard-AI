@@ -285,8 +285,18 @@ def analyze_image(image_input, image_height=1000, image_width=1000):
         
         # 3. Run inference on ENHANCED
         print(f"[DEBUG] Running model inference...")
-        # Lower confidence to 0.10 (Sync with video logic)
-        results = model.predict(enhanced_image, conf=0.10, verbose=False)
+        
+        # Resize for inference stability on low-RAM envs (Render Free Tier)
+        infer_size = 640
+        h, w = enhanced_image.shape[:2]
+        if max(h, w) > infer_size:
+            scale = infer_size / max(h, w)
+            new_h, new_w = int(h * scale), int(w * scale)
+            enhanced_image = cv2.resize(enhanced_image, (new_w, new_h))
+            print(f"[DEBUG] Resized for inference: {new_w}x{new_h}")
+
+        # Increase confidence to 0.25 to reduce NMS load
+        results = model.predict(enhanced_image, conf=0.25, imgsz=infer_size, verbose=False)
         
         print(f"[DEBUG] Model returned {len(results)} result(s)")
         
