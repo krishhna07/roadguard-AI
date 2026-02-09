@@ -15,6 +15,7 @@ except ImportError:
 import os
 import warnings
 import database
+import gc
 warnings.filterwarnings('ignore')
 
 app = Flask(__name__)
@@ -524,6 +525,11 @@ def analyze():
             # Analyze
             result = analyze_image(image_array)
             
+            # Force garbage collection
+            del image_array
+            del image
+            gc.collect()
+            
             return jsonify(result)
         except UnidentifiedImageError:
             print("[ERROR] PIL could not identify image format")
@@ -772,7 +778,7 @@ def analyze_video():
             department = 'UTILITY'
 
         # Return response with processed video
-        return jsonify({
+        response = jsonify({
              "detected": len(video_damage_types) > 0,
              "damageTypes": list(video_damage_types),
              "severity": max_video_severity,
@@ -783,6 +789,13 @@ def analyze_video():
              "originalMediaUrl": original_media_url,   # URL to original video (for report card)
              "department": department
         })
+        
+        # Cleanup
+        del video_data
+        if 'video_bytes' in locals(): del video_bytes
+        gc.collect()
+        
+        return response
             
     except Exception as e:
         print(f"Video analysis error: {e}")

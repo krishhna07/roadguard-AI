@@ -1,0 +1,8 @@
+# Vercel Ignore
+backend/
+node_modules/
+.git/
+.venv/
+venv/
+*.pdf
+*.zip
