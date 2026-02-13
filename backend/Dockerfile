@@ -22,12 +22,15 @@ COPY requirements.txt .
 # 1. Install CPU-only PyTorch (Crucial to avoid 3GB+ GPU libs)
 RUN pip install --no-cache-dir torch torchvision --index-url https://download.pytorch.org/whl/cpu
 
-# 2. Install remaining dependencies
-# We chain commands to ensure opencv-python (GUI) is removed if installed by transitive deps (like ultralytics)
-# AND we force-reinstall headless to repair any broken files from the uninstall
-RUN pip install --no-cache-dir -r requirements.txt && \
-    pip uninstall -y opencv-python opencv-python-headless || true && \
-    pip install --force-reinstall --no-cache-dir opencv-python-headless==4.9.0.80
+# 2. Install dependencies from requirements.txt (includes opencv-python-headless)
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 3. Install Ultralytics WITHOUT dependencies to prevent it from pulling in opencv-python (GUI)
+# We have already installed its necessary deps (matplotlib, tqdm, etc.) in requirements.txt
+RUN pip install --no-cache-dir "ultralytics>=8.0.0" --no-deps
+
+# 4. Verify OpenCV installation immediately during build
+RUN python -c "import cv2; print(f'OpenCV Version: {cv2.__version__}')"
 
 # Copy the rest of the application code
 COPY . .
