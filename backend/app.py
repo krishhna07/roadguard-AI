@@ -23,7 +23,8 @@ app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024 # 100MB Limit
 database.init_db()
 CORS(app)
 
-VERSION = "1.1.2" # Bump version for tracking
+VERSION = "1.1.3" # Bump version for tracking
+
 
 
 
@@ -537,9 +538,27 @@ def health():
         "model_path": model_path_used,
         "analysis_status": status,
         "analysis_status": status,
+        "analysis_status": status,
         "device": str(device),
         "version": VERSION
     })
+
+@app.route('/debug-env', methods=['GET'])
+def debug_env():
+    """Debug endpoint to check installed libraries"""
+    import pkg_resources
+    
+    installed_packages = {pkg.key: pkg.version for pkg in pkg_resources.working_set}
+    
+    debug_info = {
+        "version": VERSION,
+        "opencv_version": cv2.__version__,
+        "numpy_version": np.__version__,
+        "torch_version": torch.__version__,
+        "packages": installed_packages,
+        "env_vars": {k: v for k, v in os.environ.items() if 'KEY' not in k and 'SECRET' not in k and 'PASS' not in k} # Safe env vars
+    }
+    return jsonify(debug_info)
 
 @app.route('/analyze', methods=['POST'])
 def analyze():
