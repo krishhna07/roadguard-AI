@@ -13,6 +13,10 @@ DB_NAME = "roadguard"
 
 def get_db():
     try:
+        # Check for common configuration errors
+        if '<' in MONGO_URI or '>' in MONGO_URI:
+            print("[CRITICAL WARNING] MONGO_URI appears to contain placeholder characters (< or >). check your environment variables!")
+            
         client = MongoClient(MONGO_URI, server_api=ServerApi('1'))
         # Send a ping to confirm a successful connection
         # client.admin.command('ping') 
