@@ -23,7 +23,8 @@ app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024 # 100MB Limit
 database.init_db()
 CORS(app)
 
-VERSION = "1.1.0"
+VERSION = "1.1.1" # Bump version for tracking
+
 
 
 import logging
@@ -299,20 +300,35 @@ def analyze_image(image_input, image_height=1000, image_width=1000):
             print(f"[WARN] enhanced_image was {type(enhanced_image)}, converting to np.array")
             enhanced_image = np.array(enhanced_image)
             
-        # Float images need to be converted to uint8
-        if enhanced_image.dtype != np.uint8:
-             enhanced_image = (enhanced_image * 255).astype(np.uint8) if enhanced_image.max() <= 1 else enhanced_image.astype(np.uint8)
-             
-        enhanced_image = np.ascontiguousarray(enhanced_image)
+        # Explicitly force uint8 and contiguous array
+        try:
+            if not isinstance(enhanced_image, np.ndarray):
+                print(f"[WARN] enhanced_image is {type(enhanced_image)}, forcing np.array")
+                enhanced_image = np.array(enhanced_image)
+            
+            if enhanced_image.dtype != np.uint8:
+                 print(f"[WARN] enhanced_image dtype is {enhanced_image.dtype}, casting to uint8")
+                 # Check for object arrays which might contain None or garbage
+                 if enhanced_image.dtype == 'object':
+                     enhanced_image = image_data.copy() # Fallback to original
+                     print("[WARN] Fallback to original image due to object dtype")
+                 else:
+                     enhanced_image = (enhanced_image * 255).astype(np.uint8) if enhanced_image.max() <= 1 else enhanced_image.astype(np.uint8)
 
-        # Resize for inference stability on low-RAM envs (Render Free Tier)
-        infer_size = 640
-        h, w = enhanced_image.shape[:2]
-        if max(h, w) > infer_size:
-            scale = infer_size / max(h, w)
-            new_h, new_w = int(h * scale), int(w * scale)
-            enhanced_image = cv2.resize(enhanced_image, (new_w, new_h))
-            print(f"[DEBUG] Resized for inference: {new_w}x{new_h}")
+            enhanced_image = np.ascontiguousarray(enhanced_image, dtype=np.uint8)
+            print(f"[DEBUG] Pre-resize Check: Shape={enhanced_image.shape}, Dtype={enhanced_image.dtype}, Type={type(enhanced_image)}")
+
+            # Resize for inference stability on low-RAM envs (Render Free Tier)
+            infer_size = 640
+            h, w = enhanced_image.shape[:2]
+            if max(h, w) > infer_size:
+                scale = infer_size / max(h, w)
+                new_h, new_w = int(h * scale), int(w * scale)
+                enhanced_image = cv2.resize(enhanced_image, (new_w, new_h))
+                print(f"[DEBUG] Resized for inference: {new_w}x{new_h}")
+        except Exception as e:
+            print(f"[ERROR] Resize failed: {e}. Fallback to original image.")
+            enhanced_image = np.ascontiguousarray(image_data, dtype=np.uint8)
 
         # Increase confidence to 0.25 to reduce NMS load
         print(f"[DEBUG] Pre-inference check: Type={type(enhanced_image)}, Shape={enhanced_image.shape}, Dtype={enhanced_image.dtype}")
