@@ -23,6 +23,9 @@ app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024 # 100MB Limit
 database.init_db()
 CORS(app)
 
+VERSION = "1.1.0"
+
+
 import logging
 logging.basicConfig(filename='backend_error.log', level=logging.DEBUG, 
                     format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
@@ -512,7 +515,9 @@ def health():
         "model_loaded": model is not None,
         "model_path": model_path_used,
         "analysis_status": status,
-        "device": str(device)
+        "analysis_status": status,
+        "device": str(device),
+        "version": VERSION
     })
 
 @app.route('/analyze', methods=['POST'])
