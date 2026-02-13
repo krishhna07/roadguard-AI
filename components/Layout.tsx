@@ -78,7 +78,7 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout, onNavigate, onSwitchPor
 
       {/* Main Header */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex justify-between items-center bg-white">
+        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 h-auto min-h-[4rem] py-2 md:h-24 md:py-0 flex justify-between items-center bg-white">
 
           {/* Logo Section */}
           <div className="flex items-center space-x-4">
@@ -87,7 +87,7 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout, onNavigate, onSwitchPor
               <img
                 src="/assets/logo.png"
                 alt="Solapur Municipal Corporation Emblem"
-                className="h-20 w-auto"
+                className="h-12 w-auto md:h-20"
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = 'none';
                 }}
@@ -95,8 +95,8 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout, onNavigate, onSwitchPor
             </div>
 
             <div className="flex flex-col justify-center">
-              <h2 className="text-xl font-bold text-[#EA580C] leading-tight">ದಾವಣಗೆರೆ ಮಹಾನಗರ ಪಾಲಿಕೆ</h2>
-              <h1 className="text-xl md:text-2xl font-serif font-bold text-[#1E3A8A] leading-tight uppercase tracking-tight">DAVANAGERE MUNICIPAL CORPORATION</h1>
+              <h2 className="text-sm md:text-xl font-bold text-[#EA580C] leading-tight">ದಾವಣಗೆರೆ ಮಹಾನಗರ ಪಾಲಿಕೆ</h2>
+              <h1 className="text-sm md:text-2xl font-serif font-bold text-[#1E3A8A] leading-tight uppercase tracking-tight">DAVANAGERE MUNICIPAL CORPORATION</h1>
               <p className="text-xs font-semibold text-gray-500 mt-0.5">{t.govtName}</p>
             </div>
           </div>

@@ -554,7 +554,7 @@ const App: React.FC = () => {
             />
           </div>
 
-          <h1 className="text-3xl font-serif font-bold text-[#1E3A8A] mb-2 text-center">Davanagere Municipal Corporation</h1>
+          <h1 className="text-xl md:text-3xl font-serif font-bold text-[#1E3A8A] mb-2 text-center px-4">Davanagere Municipal Corporation</h1>
           <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-8">Road Condition Monitoring System</p>
 
           <div className="w-64 h-1 bg-gray-200 rounded-full overflow-hidden">
@@ -591,7 +591,7 @@ const App: React.FC = () => {
               <h2 className="text-xl font-serif font-bold text-[#1E3A8A] mb-1">
                 {loginType === 'USER' ? 'Citizen Sign In' : (loginType === 'WARD' ? 'Ward Official Login' : (loginType === 'CONTRACTOR' ? 'Contractor Login' : 'Department Login'))}
               </h2>
-              <p className="text-xs text-gray-500 uppercase font-bold tracking-wide">
+              <p className="text-[10px] md:text-xs text-gray-500 uppercase font-bold tracking-wide text-center px-2">
                 {loginType === 'USER' ? 'Davanagere Municipal Corporation' : (loginType === 'WARD' ? 'Local Ward Access' : (loginType === 'CONTRACTOR' ? 'Authorized Contractor Access' : 'Official Portal Access'))}
               </p>
             </div>
