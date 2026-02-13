@@ -23,7 +23,8 @@ app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024 # 100MB Limit
 database.init_db()
 CORS(app)
 
-VERSION = "1.1.1" # Bump version for tracking
+VERSION = "1.1.2" # Bump version for tracking
+
 
 
 
@@ -333,7 +334,11 @@ def analyze_image(image_input, image_height=1000, image_width=1000):
         # Increase confidence to 0.25 to reduce NMS load
         print(f"[DEBUG] Pre-inference check: Type={type(enhanced_image)}, Shape={enhanced_image.shape}, Dtype={enhanced_image.dtype}")
         
-        results = model.predict(enhanced_image, conf=0.25, imgsz=infer_size, verbose=False)
+        # Convert to PIL Image for inference - Ultralytics handles PIL much better than raw numpy arrays
+        # This bypasses the specific cv2.resize error seen in the container environment
+        pil_inference_image = Image.fromarray(enhanced_image)
+        
+        results = model.predict(pil_inference_image, conf=0.25, imgsz=infer_size, verbose=False)
         
         print(f"[DEBUG] Model returned {len(results)} result(s)")
         
