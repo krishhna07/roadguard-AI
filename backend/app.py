@@ -296,6 +296,14 @@ def analyze_image(image_input, image_height=1000, image_width=1000):
             print(f"[DEBUG] Resized for inference: {new_w}x{new_h}")
 
         # Increase confidence to 0.25 to reduce NMS load
+        print(f"[DEBUG] Pre-inference check: Type={type(enhanced_image)}, Shape={enhanced_image.shape}, Dtype={enhanced_image.dtype}")
+        
+        # Ensure standard uint8 numpy array
+        if not isinstance(enhanced_image, np.ndarray):
+            enhanced_image = np.array(enhanced_image)
+            
+        enhanced_image = np.ascontiguousarray(enhanced_image, dtype=np.uint8)
+        
         results = model.predict(enhanced_image, conf=0.25, imgsz=infer_size, verbose=False)
         
         print(f"[DEBUG] Model returned {len(results)} result(s)")
