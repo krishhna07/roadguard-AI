@@ -23,7 +23,8 @@ app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024 # 100MB Limit
 database.init_db()
 CORS(app)
 
-VERSION = "1.1.3" # Bump version for tracking
+VERSION = "1.1.4" # Bump version for tracking
+
 
 
 

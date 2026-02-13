@@ -26,6 +26,12 @@ RUN pip install --no-cache-dir torch torchvision --index-url https://download.py
 # We use --no-deps for ultralytics to prevent it from reinstalling full PyTorch
 RUN pip install --no-cache-dir -r requirements.txt
 
+# 3. FIX: Ultralytics installs 'opencv-python' (GUI version) which overrides our pinned headless version.
+# We must uninstall it to force usage of 'opencv-python-headless'
+RUN pip uninstall -y opencv-python || true
+# Re-ensure headless is there
+RUN pip install opencv-python-headless==4.9.0.80
+
 # Copy the rest of the application code
 COPY . .
 
