@@ -58,15 +58,15 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout, onNavigate, onSwitchPor
       {/* Top Strip - Standard Govt Feature */}
       <div className="bg-[#1B1D21] border-b border-gray-700 py-1.5 px-4 text-[11px] font-medium text-gray-300">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex space-x-6">
-            <span className="hover:text-white cursor-default">{t.govtName}</span>
-            <span className="hover:text-white cursor-default">{t.corpName}</span>
+          <div className="flex space-x-4 md:space-x-6">
+            <span className="hover:text-white cursor-default text-[10px] md:text-[11px]">{t.govtName}</span>
+            <span className="hover:text-white cursor-default hidden md:inline text-[11px]">{t.corpName}</span>
           </div>
-          <div className="flex space-x-4">
-            <a href="#main-content" className="hover:text-white transition-colors">{t.skipContent}</a>
-            <span>|</span>
-            <a href="#main-content" className="hover:text-white transition-colors">{t.screenReader}</a>
-            <span>|</span>
+          <div className="flex space-x-4 items-center">
+            <a href="#main-content" className="hover:text-white transition-colors hidden md:inline">{t.skipContent}</a>
+            <span className="hidden md:inline">|</span>
+            <a href="#main-content" className="hover:text-white transition-colors hidden md:inline">{t.screenReader}</a>
+            <span className="hidden md:inline">|</span>
             <div className="flex items-center space-x-1">
               <button onClick={() => handleFontSize('decrease')} className="w-5 h-5 bg-gray-700 rounded flex items-center justify-center text-[9px] hover:bg-white hover:text-black transition-colors" aria-label="Decrease font size">A-</button>
               <button onClick={() => handleFontSize('reset')} className="w-5 h-5 bg-gray-700 rounded flex items-center justify-center text-[9px] hover:bg-white hover:text-black transition-colors" aria-label="Reset font size">A</button>
@@ -87,17 +87,17 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout, onNavigate, onSwitchPor
               <img
                 src="/assets/logo.png"
                 alt="Solapur Municipal Corporation Emblem"
-                className="h-12 w-auto md:h-20"
+                className="h-10 w-auto md:h-20"
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = 'none';
                 }}
               />
             </div>
 
-            <div className="flex flex-col justify-center">
-              <h2 className="text-sm md:text-xl font-bold text-[#EA580C] leading-tight">ದಾವಣಗೆರೆ ಮಹಾನಗರ ಪಾಲಿಕೆ</h2>
-              <h1 className="text-sm md:text-2xl font-serif font-bold text-[#1E3A8A] leading-tight uppercase tracking-tight">DAVANAGERE MUNICIPAL CORPORATION</h1>
-              <p className="text-xs font-semibold text-gray-500 mt-0.5">{t.govtName}</p>
+            <div className="flex flex-col justify-center ml-2 md:ml-0">
+              <h2 className="text-xs md:text-xl font-bold text-[#EA580C] leading-tight">ದಾವಣಗೆರೆ ಮಹಾನಗರ ಪಾಲಿಕೆ</h2>
+              <h1 className="text-[10px] md:text-2xl font-serif font-bold text-[#1E3A8A] leading-tight uppercase tracking-tight max-w-[200px] md:max-w-none">DAVANAGERE MUNICIPAL CORPORATION</h1>
+              <p className="text-[9px] md:text-xs font-semibold text-gray-500 mt-0.5 hidden md:block">{t.govtName}</p>
             </div>
           </div>
 
