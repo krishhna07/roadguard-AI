@@ -107,7 +107,7 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout, onNavigate, onSwitchPor
               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">State Govt</p>
             </div>
             <img
-              src="/assets/Seal_of_Karnataka.svg"
+              src="/assets/Seal_of_Karnataka.png"
               alt="Karnataka Government Emblem"
               className="h-16 w-auto opacity-90"
             />
