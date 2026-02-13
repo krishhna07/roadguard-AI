@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y \
     libxext6 \
     libxrender-dev \
     libgl1 \
+    ffmpeg \
+    libavcodec-extra \
     && rm -rf /var/lib/apt/lists/*
 
 # Upgrade pip

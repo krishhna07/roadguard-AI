@@ -23,7 +23,7 @@ app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024 # 100MB Limit
 database.init_db()
 CORS(app)
 
-VERSION = "1.1.7" # Bump version for tracking
+VERSION = "1.1.8" # Bump version for tracking
 
 
 
@@ -726,9 +726,9 @@ def analyze_video():
             # some browsers might not play it natively (they often can play mp4v in .mp4 container though).
             # OR we try avc1 inside a broad try/catch to avoid crashing the thread.
             
-            # We prioritize mp4v for backend stability (Linux/Docker often lacks avc1 encoders)
-            # Browser support for mp4v is lower, but 'avc1' crashes the backend.
-            codecs_to_try = ['mp4v', 'avc1', 'h264']
+            # We prioritize avc1 (H.264) for browser compatibility.
+            # Dockerfile now includes ffmpeg/libavcodec-extra to support this.
+            codecs_to_try = ['avc1', 'h264', 'mp4v']
             
             for codec in codecs_to_try:
                 try:
