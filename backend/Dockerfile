@@ -24,9 +24,10 @@ RUN pip install --no-cache-dir torch torchvision --index-url https://download.py
 
 # 2. Install remaining dependencies
 # We chain commands to ensure opencv-python (GUI) is removed if installed by transitive deps (like ultralytics)
+# AND we force-reinstall headless to repair any broken files from the uninstall
 RUN pip install --no-cache-dir -r requirements.txt && \
-    pip uninstall -y opencv-python && \
-    pip install opencv-python-headless==4.9.0.80
+    pip uninstall -y opencv-python opencv-python-headless || true && \
+    pip install --force-reinstall --no-cache-dir opencv-python-headless==4.9.0.80
 
 # Copy the rest of the application code
 COPY . .
