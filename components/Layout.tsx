@@ -85,7 +85,7 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout, onNavigate, onSwitchPor
             {/* SMC Logo */}
             <div className="flex-shrink-0">
               <img
-                src="/assets/logo.svg"
+                src="/assets/logo.png"
                 alt="Solapur Municipal Corporation Emblem"
                 className="h-20 w-auto"
                 onError={(e) => {
