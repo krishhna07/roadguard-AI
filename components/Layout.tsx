@@ -85,7 +85,7 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout, onNavigate, onSwitchPor
             {/* SMC Logo */}
             <div className="flex-shrink-0">
               <img
-                src="/assets/logo.png"
+                src="/assets/logo.svg"
                 alt="Solapur Municipal Corporation Emblem"
                 className="h-20 w-auto"
                 onError={(e) => {
@@ -95,88 +95,88 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout, onNavigate, onSwitchPor
             </div>
 
             <div className="flex flex-col justify-center">
-              <h2 className="text-xl font-bold text-[#EA580C] leading-tight">सोलापूर महानगरपालिका</h2>
-              <h1 className="text-xl md:text-2xl font-serif font-bold text-[#1E3A8A] leading-tight uppercase tracking-tight">SOLAPUR MUNICIPAL CORPORATION</h1>
+              <h2 className="text-xl font-bold text-[#EA580C] leading-tight">ದಾವಣಗೆರೆ ಮಹಾನಗರ ಪಾಲಿಕೆ</h2>
+              <h1 className="text-xl md:text-2xl font-serif font-bold text-[#1E3A8A] leading-tight uppercase tracking-tight">DAVANAGERE MUNICIPAL CORPORATION</h1>
               <p className="text-xs font-semibold text-gray-500 mt-0.5">{t.govtName}</p>
             </div>
           </div>
 
           {/* Right Emblem */}
           <div className="hidden md:flex items-center space-x-4">
-             <div className="text-right hidden lg:block">
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">State Govt</p>
-             </div>
-             <img 
-               src="/assets/maharashtra_logo.jpg" 
-               alt="Maharashtra Government Emblem" 
-               className="h-16 w-auto opacity-90"
-             />
+            <div className="text-right hidden lg:block">
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">State Govt</p>
+            </div>
+            <img
+              src="/assets/Seal_of_Karnataka.svg"
+              alt="Karnataka Government Emblem"
+              className="h-16 w-auto opacity-90"
+            />
           </div>
         </div>
 
         {/* Blue Navigation Strip */}
         <div className="bg-[#1C5D9F] text-white shadow-md">
-           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex items-center h-12 space-x-1 md:space-x-8 text-[13px] font-bold tracking-wide uppercase">
-                 <a href="#home" onClick={(e) => handleNavClick('home', e)} className="hover:bg-blue-700 px-4 py-3 transition-colors whitespace-nowrap">Home</a>
-                 <a href="#about" onClick={(e) => handleNavClick('about', e)} className="hover:bg-blue-700 px-4 py-3 transition-colors whitespace-nowrap">{t.aboutUs}</a>
-                 <a href="#services" onClick={(e) => handleNavClick('services', e)} className="hover:bg-blue-700 px-4 py-3 transition-colors whitespace-nowrap">{t.servicesTitle}</a>
-                 <a href="#contact" onClick={(e) => handleNavClick('contact', e)} className="hover:bg-blue-700 px-4 py-3 transition-colors whitespace-nowrap">{t.contactUs}</a>
-                 
-                 <div className="flex-grow"></div>
-                 
-                 {/* Login/User Section in Nav Bar */}
-                 {user ? (
-                    <div className="flex items-center cursor-pointer hover:bg-blue-700 px-4 py-3" onClick={() => setShowPortalMenu(!showPortalMenu)}>
-                       <i className="fas fa-user-circle mr-2 text-lg"></i>
-                       <span>{user.username}</span>
-                    </div>
-                 ) : (
-                    <div className="hidden md:block italic text-blue-200 normal-case font-medium text-xs">
-                       {t.officialPortal}
-                    </div>
-                 )}
-              </div>
-           </div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center h-12 space-x-1 md:space-x-8 text-[13px] font-bold tracking-wide uppercase">
+              <a href="#home" onClick={(e) => handleNavClick('home', e)} className="hover:bg-blue-700 px-4 py-3 transition-colors whitespace-nowrap">Home</a>
+              <a href="#about" onClick={(e) => handleNavClick('about', e)} className="hover:bg-blue-700 px-4 py-3 transition-colors whitespace-nowrap">{t.aboutUs}</a>
+              <a href="#services" onClick={(e) => handleNavClick('services', e)} className="hover:bg-blue-700 px-4 py-3 transition-colors whitespace-nowrap">{t.servicesTitle}</a>
+              <a href="#contact" onClick={(e) => handleNavClick('contact', e)} className="hover:bg-blue-700 px-4 py-3 transition-colors whitespace-nowrap">{t.contactUs}</a>
+
+              <div className="flex-grow"></div>
+
+              {/* Login/User Section in Nav Bar */}
+              {user ? (
+                <div className="flex items-center cursor-pointer hover:bg-blue-700 px-4 py-3" onClick={() => setShowPortalMenu(!showPortalMenu)}>
+                  <i className="fas fa-user-circle mr-2 text-lg"></i>
+                  <span>{user.username}</span>
+                </div>
+              ) : (
+                <div className="hidden md:block italic text-blue-200 normal-case font-medium text-xs">
+                  {t.officialPortal}
+                </div>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Dropdown Menu (Moved relative position handled by fixed/absolute but logic remains in App or here) */}
         {user && showPortalMenu && (
-             <div className="absolute right-4 top-36 w-56 bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden animate-fade-in z-50">
-               <div className="p-2 border-b border-gray-100 bg-gray-50">
-                 <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider px-2">Switch Portal</p>
-               </div>
-               <div className="p-1">
-                 {[
-                   { type: 'USER', label: 'Citizen Portal', icon: 'fa-user' },
-                   { type: 'CORPORATION', label: 'Department Portal', icon: 'fa-building' },
-                   { type: 'WARD', label: 'Ward Portal', icon: 'fa-map-marked-alt' },
-                   { type: 'CONTRACTOR', label: 'Contractor Portal', icon: 'fa-hard-hat' }
-                 ].map((portal) => (
-                   <button
-                     key={portal.type}
-                     onClick={() => {
-                       if (onSwitchPortal) onSwitchPortal(portal.type as any);
-                       setShowPortalMenu(false);
-                     }}
-                     className="w-full text-left px-3 py-2 text-xs font-bold text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded flex items-center transition-colors"
-                   >
-                     <i className={`fas ${portal.icon} w-5 text-center mr-2 text-gray-400`}></i>
-                     {portal.label}
-                   </button>
-                 ))}
-               </div>
-               <div className="border-t border-gray-100 p-1">
-                 <button
-                   onClick={onLogout}
-                   className="w-full text-left px-3 py-2 text-xs font-bold text-red-600 hover:bg-red-50 rounded flex items-center transition-colors"
-                 >
-                   <i className="fas fa-power-off w-5 text-center mr-2"></i>
-                   Logout
-                 </button>
-               </div>
-             </div>
-           )}
+          <div className="absolute right-4 top-36 w-56 bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden animate-fade-in z-50">
+            <div className="p-2 border-b border-gray-100 bg-gray-50">
+              <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider px-2">Switch Portal</p>
+            </div>
+            <div className="p-1">
+              {[
+                { type: 'USER', label: 'Citizen Portal', icon: 'fa-user' },
+                { type: 'CORPORATION', label: 'Department Portal', icon: 'fa-building' },
+                { type: 'WARD', label: 'Ward Portal', icon: 'fa-map-marked-alt' },
+                { type: 'CONTRACTOR', label: 'Contractor Portal', icon: 'fa-hard-hat' }
+              ].map((portal) => (
+                <button
+                  key={portal.type}
+                  onClick={() => {
+                    if (onSwitchPortal) onSwitchPortal(portal.type as any);
+                    setShowPortalMenu(false);
+                  }}
+                  className="w-full text-left px-3 py-2 text-xs font-bold text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded flex items-center transition-colors"
+                >
+                  <i className={`fas ${portal.icon} w-5 text-center mr-2 text-gray-400`}></i>
+                  {portal.label}
+                </button>
+              ))}
+            </div>
+            <div className="border-t border-gray-100 p-1">
+              <button
+                onClick={onLogout}
+                className="w-full text-left px-3 py-2 text-xs font-bold text-red-600 hover:bg-red-50 rounded flex items-center transition-colors"
+              >
+                <i className="fas fa-power-off w-5 text-center mr-2"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        )}
 
       </header>
 
@@ -221,7 +221,7 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout, onNavigate, onSwitchPor
               <p className="text-gray-400 leading-relaxed">
                 Indrabhuvan,<br />
                 Railway Lines,<br />
-                Solapur - 413001
+                Davanagere - 577002
               </p>
               <div className="mt-4 flex space-x-4">
                 <a href="#" className="text-gray-400 hover:text-white"><i className="fab fa-twitter"></i></a>

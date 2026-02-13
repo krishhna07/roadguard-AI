@@ -1,4 +1,4 @@
-export type Language = 'en' | 'hi' | 'mr';
+export type Language = 'en' | 'hi' | 'mr' | 'kn';
 
 export const translations = {
     en: {
@@ -6,7 +6,7 @@ export const translations = {
         heroTitle: "Intelligent Road Condition Monitoring",
         heroSubtitle: "Empowering citizens and authorities to create safer, smarter infrastructure through AI-driven reporting.",
         citizenLogin: "Citizen Login",
-        deptLogin: "National Highway Authority",
+        deptLogin: "Davanagere Highway Authority",
         wardLogin: "Municipal Corporation",
         contractorPortal: "Contractor Portal",
 
@@ -33,12 +33,12 @@ export const translations = {
         language: "Language",
 
         // Header & Footer
-        govtName: "Government of Maharashtra",
-        corpName: "Solapur Municipal Corporation",
+        govtName: "Government of Karnataka",
+        corpName: "Davanagere Municipal Corporation",
         skipContent: "Skip to Main Content",
         screenReader: "Screen Reader Access",
-        officialPortal: "Solapur Municipal Corporation Official Portal",
-        
+        officialPortal: "Davanagere Municipal Corporation Official Portal",
+
         // Footer Columns
         infoRelated: "Information Related To",
         aboutCorp: "About Corporation",
@@ -80,7 +80,7 @@ export const translations = {
         heroTitle: "बुद्धिमान सड़क स्थिति निगरानी",
         heroSubtitle: "एआई-संचालित रिपोर्टिंग के माध्यम से सुरक्षित और स्मार्ट बुनियादी ढांचा बनाने के लिए नागरिकों और अधिकारियों को सशक्त बनाना।",
         citizenLogin: "नागरिक लॉगिन",
-        deptLogin: "राष्ट्रीय राजमार्ग प्राधिकरण",
+        deptLogin: "दावणगेरे राजमार्ग प्राधिकरण",
         wardLogin: "नगर निगम",
         contractorPortal: "ठेकेदार पोर्टल",
 
@@ -107,11 +107,11 @@ export const translations = {
         language: "भाषा",
 
         // Header & Footer
-        govtName: "महाराष्ट्र सरकार",
-        corpName: "सोलापुर महानगरपालिका",
+        govtName: "कर्नाटक सरकार",
+        corpName: "दावणगेरे महानगरपालिका",
         skipContent: "मुख्य सामग्री पर जाएं",
         screenReader: "स्क्रीन रीडर एक्सेस",
-        officialPortal: "सोलापुर महानगरपालिका आधिकारिक पोर्टल",
+        officialPortal: "दावणगेरे महानगरपालिका आधिकारिक पोर्टल",
 
         // Footer Columns
         infoRelated: "संबंधित जानकारी",
@@ -154,7 +154,7 @@ export const translations = {
         heroTitle: "बुद्धिमान रस्ता स्थिती निरीक्षण",
         heroSubtitle: "एआय-आधारित रिपोर्टिंगद्वारे सुरक्षित आणि स्मार्ट पायाभूत सुविधा निर्माण करण्यासाठी नागरिक आणि अधिकाऱ्यांना सक्षम करणे.",
         citizenLogin: "नागरिक लॉगिन",
-        deptLogin: "राष्ट्रीय महामार्ग प्राधिकरण",
+        deptLogin: "दावणगेरे महामार्ग प्राधिकरण",
         wardLogin: "महानगरपालिका",
         contractorPortal: "कंत्राटदार पोर्टल",
 
@@ -181,11 +181,11 @@ export const translations = {
         language: "भाषा",
 
         // Header & Footer
-        govtName: "महाराष्ट्र शासन",
-        corpName: "सोलापूर महानगरपालिका",
+        govtName: "कर्नाटक सरकार",
+        corpName: "दावणगेरे महानगरपालिका",
         skipContent: "मुख्य सामग्रीकडे जा",
         screenReader: "स्क्रीन रीडर ऍक्सेस",
-        officialPortal: "सोलापूर महानगरपालिका अधिकृत पोर्टल",
+        officialPortal: "दावणगेरे महानगरपालिका अधिकृत पोर्टल",
 
         // Footer Columns
         infoRelated: "संबंधित माहिती",
@@ -222,5 +222,79 @@ export const translations = {
         // Misc
         govtAssuranceTitle: "शासकीय आश्वासन",
         govtAssuranceDesc: "सादर केलेला प्रत्येक अहवाल राष्ट्रीय पायाभूत सुविधा डेटाबेसमध्ये योगदान देतो. स्वयंचलित गंभीरता मूल्यांकन आणि संसाधन वाटप प्रोटोकॉलवर आधारित कारवाई केली जाते."
+    },
+    kn: {
+        // Landing
+        heroTitle: "ಬುದ್ಧಿವಂತ ರಸ್ತೆ ಸ್ಥಿತಿ ಮಾನಿಟರಿಂಗ್",
+        heroSubtitle: "ಎಐ-ಚಾಲಿತ ವರದಿ ಮಾಡುವ ಮೂಲಕ ಸುರಕ್ಷಿತ, ಚುರುಕಾದ ಮೂಲಸೌಕರ್ಯವನ್ನು ನಿರ್ಮಿಸಲು ನಾಗರಿಕರು ಮತ್ತು ಅಧಿಕಾರಿಗಳನ್ನು ಸಶಕ್ತಗೊಳಿಸುವುದು.",
+        citizenLogin: "ನಾಗರಿಕ ಲಾಗಿನ್",
+        deptLogin: "ದಾವಣಗೆರೆ ಹೆದ್ದಾರಿ ಪ್ರಾಧಿಕಾರ",
+        wardLogin: "ಮಹಾನಗರ ಪಾಲಿಕೆ",
+        contractorPortal: "ಗುತ್ತಿಗೆದಾರ ಪೋರ್ಟಲ್",
+
+        // Stats
+        statTotal: "ಒಟ್ಟು ವರದಿಗಳು",
+        statFixed: "ದುರಸ್ತಿ ಪೂರ್ಣಗೊಂಡಿದೆ",
+        statActive: "ಸಕ್ರಿಯ ಇಲಾಖೆಗಳು",
+        statPending: "ಬಾಕಿ ಉಳಿದಿರುವ ಕ್ರಿಯೆ",
+
+        // Portal Cards
+        cardCitizenTitle: "ನಾಗರಿಕ ಅಪ್ಲಿಕೇಶನ್",
+        cardCitizenDesc: "ರಸ್ತೆ ದೋಷಗಳನ್ನು ವರದಿ ಮಾಡಿ, ಸ್ಥಿತಿಯನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಿ ಮತ್ತು ಎಐ ವಿಶ್ಲೇಷಣೆಯನ್ನು ವೀಕ್ಷಿಸಿ.",
+        cardDeptTitle: "ಇಲಾಖಾ ಪೋರ್ಟಲ್",
+        cardDeptDesc: "ಅಧಿಕಾರ ವ್ಯಾಪ್ತಿಯನ್ನು ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡಿ, ಮೇಲ್ವಿಚಾರಕರನ್ನು ನಿಯೋಜಿಸಿ ಮತ್ತು ಡೇಟಾವನ್ನು ವಿಶ್ಲೇಷಿಸಿ.",
+        cardWardTitle: "ವಾರ್ಡ್ ಕಾರ್ಯಗಳು",
+        cardWardDesc: "ಸ್ಥಳೀಯ ದುರಸ್ತಿಗಳನ್ನು ನಿರ್ವಹಿಸಿ, ಗುತ್ತಿಗೆದಾರರ ಕೆಲಸವನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಸ್ಥಿತಿಯನ್ನು ನವೀಕರಿಸಿ.",
+
+        // Actions
+        btnEnter: "ಪೋರ್ಟಲ್ ಪ್ರವೇಶಿಸಿ",
+        btnLogin: "ಲಾಗಿನ್",
+        btnUpload: "ವರದಿ ಸಲ್ಲಿಸಿ",
+
+        // Labels
+        language: "ಭಾಷೆ",
+
+        // Header & Footer
+        govtName: "ಕರ್ನಾಟಕ ಸರ್ಕಾರ",
+        corpName: "ದಾವಣಗೆರೆ ಮಹಾನಗರ ಪಾಲಿಕೆ",
+        skipContent: "ಮುಖ್ಯ ವಿಷಯಕ್ಕೆ ಹೋಗಿ",
+        screenReader: "ಸ್ಕ್ರೀನ್ ರೀಡರ್ ಪ್ರವೇಶ",
+        officialPortal: "ದಾವಣಗೆರೆ ಮಹಾನಗರ ಪಾಲಿಕೆ ಅಧಿಕೃತ ಪೋರ್ಟಲ್",
+
+        // Footer Columns
+        infoRelated: "ಸಂಬಂಧಿತ ಮಾಹಿತಿ",
+        aboutCorp: "ಪಾಲಿಕೆಯ ಬಗ್ಗೆ",
+        helpSupport: "ಸಹಾಯ ಮತ್ತು ಬೆಂಬಲ",
+        contactAddr: "ಸಂಪರ್ಕ ವಿಳಾಸ",
+        managedBy: "ವೆಬ್‌ಸೈಟ್ ವಿಷಯ ನಿರ್ವಹಣೆ",
+        rightsReserved: "ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.",
+        designedBy: "ರೋಡ್‌ಗಾರ್ಡ್ ವಿನ್ಯಾಸಗೊಳಿಸಿದೆ.",
+
+        // Footer Links
+        roadSafety: "ರಸ್ತೆ ಸುರಕ್ಷತೆ",
+        tollInfo: "ಸುಂಕ ಮಾಹಿತಿ",
+        highwayProjects: "ಹೆದ್ದಾರಿ ಯೋಜನೆಗಳು",
+        notifications: "ಸೂಚನೆಗಳು",
+        aboutUs: "ನಮ್ಮ ಬಗ್ಗೆ",
+        ourMission: "ನಮ್ಮ ಉದ್ದೇಶ",
+        actsRules: "ಕಾಯ್ದೆಗಳು ಮತ್ತು ನಿಯಮಗಳು",
+        mediaCoverage: "ಮಾಧ್ಯಮ ಪ್ರಸಾರ",
+        contactUs: "ಸಂಪರ್ಕಿಸಿ",
+        feedback: "ಪ್ರತಿಕ್ರಿಯೆ",
+        grievances: "ಕುಂದುಕೊರತೆಗಳು",
+        sitemap: "ಸೈಟ್‌ಮ್ಯಾಪ್",
+
+        // Services Section
+        servicesTitle: "ನಾಗರಿಕ ಸೇವೆಗಳು",
+        service1Title: "ರೆಕಾರ್ಡ್ ಮತ್ತು ಅಪ್‌ಲೋಡ್",
+        service1Desc: "ರಸ್ತೆ ದೋಷಗಳ ಫೋಟೋ ಅಥವಾ ವೀಡಿಯೊವನ್ನು ಸುಲಭವಾಗಿ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ. ನಮ್ಮ ವ್ಯವಸ್ಥೆಯು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಜಿಯೋಟ್ಯಾಗ್ ಮಾಡುತ್ತದೆ ಮತ್ತು ತೀವ್ರತೆಯನ್ನು ವರ್ಗೀಕರಿಸುತ್ತದೆ.",
+        service2Title: "ಎಐ ರೋಗನಿರ್ಣಯ",
+        service2Desc: "ದುರಸ್ತಿ ಅವಶ್ಯಕತೆಗಳು ಮತ್ತು ಆದ್ಯತೆಯ ಮಟ್ಟವನ್ನು ತಕ್ಷಣ ನಿರ್ಧರಿಸಲು ಸುಧಾರಿತ ಕ್ರಮಾವಳಿಗಳು ದೃಶ್ಯ ಡೇಟಾವನ್ನು ವಿಶ್ಲೇಷಿಸುತ್ತವೆ.",
+        service3Title: "ತೆಗೆದುಕೊಂಡ ಕ್ರಮವನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಿ",
+        service3Desc: "ನಿಮ್ಮ ವರದಿ ಮಾಡಿದ ಸಮಸ್ಯೆಗಳ ಸ್ಥಿತಿಯ ಬಗ್ಗೆ ನೈಜ-ದಅಪ್ಡೇಟ್‌ಗಳನ್ನು ಪಡೆಯಿರಿ ಮತ್ತು 'ಮೊದಲು/ನಂತರ'ದ ದೃಶ್ಯ ಸಾಕ್ಷ್ಯವನ್ನು ವೀಕ್ಷಿಸಿ.",
+
+        // Misc
+        govtAssuranceTitle: "ಸರ್ಕಾರಿ ಭರವಸೆ",
+        govtAssuranceDesc: "ಸಲ್ಲಿಸಲಾದ ಪ್ರತಿಯೊಂದು ವರದಿಯು ರಾಷ್ಟ್ರೀಯ ಮೂಲಸೌಕರ್ಯ ಡೇಟಾಬೇಸ್‌ಗೆ ಕೊಡುಗೆ ನೀಡುತ್ತದೆ. ಸ್ವಯಂಚಾಲಿತ ತೀವ್ರತೆಯ ಮೌಲ್ಯಮಾಪನ ಮತ್ತು ಸಂಪನ್ಮೂಲ ಹಂಚಿಕೆ ಪ್ರೋಟೋಕಾಲ್‌ಗಳ ಆಧಾರದ ಮೇಲೆ ಕ್ರಮ ಕೈಗೊಳ್ಳಲಾಗುತ್ತದೆ."
     }
 };

@@ -68,6 +68,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onWard
             >
                MR
             </button>
+            <button
+               onClick={() => setLanguage('kn')}
+               className={`px-3 py-1 rounded-full text-xs font-bold transition-colors ${language === 'kn' ? 'bg-red-600 text-white' : 'text-gray-500 hover:bg-gray-100'}`}
+            >
+               KN
+            </button>
          </div>
 
          {/* Hero Section */}
@@ -155,7 +161,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onWard
                      <div className="h-48 overflow-hidden relative bg-green-700"> {/* Added bg-green-700 fallback */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
                         <img
-                           src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?ixlib=rb-1.2.1-auto&auto=format&fit=crop&w=800&q=80" 
+                           src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?ixlib=rb-1.2.1-auto&auto=format&fit=crop&w=800&q=80"
                            alt="Ward Portal"
                            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 mixture-blend-overlay"
                            onError={(e) => { (e.target as HTMLImageElement).classList.add('opacity-50'); }}

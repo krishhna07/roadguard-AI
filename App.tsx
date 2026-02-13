@@ -211,14 +211,14 @@ const App: React.FC = () => {
 
           let mediaUrl = base64Data;
           if (analysis.originalMediaUrl) {
-              const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
-              mediaUrl = analysis.originalMediaUrl.startsWith('/') 
-                  ? `${backendUrl}${analysis.originalMediaUrl}` 
-                  : analysis.originalMediaUrl;
-              
-              if (analysis.processedMediaUrl && analysis.processedMediaUrl.startsWith('/')) {
-                  analysis.processedMediaUrl = `${backendUrl}${analysis.processedMediaUrl}`;
-              }
+            const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+            mediaUrl = analysis.originalMediaUrl.startsWith('/')
+              ? `${backendUrl}${analysis.originalMediaUrl}`
+              : analysis.originalMediaUrl;
+
+            if (analysis.processedMediaUrl && analysis.processedMediaUrl.startsWith('/')) {
+              analysis.processedMediaUrl = `${backendUrl}${analysis.processedMediaUrl}`;
+            }
           }
 
           const newReport: RoadReport = {
@@ -393,57 +393,57 @@ const App: React.FC = () => {
           return;
         }
 
-      const role = loginType === 'CORPORATION' || loginType === 'WARD' ? UserRole.CORPORATION : (loginType === 'CONTRACTOR' ? UserRole.CONTRACTOR : UserRole.USER);
-      const newUser: User = {
-        id: Math.random().toString(36).substr(2, 9),
-        username,
-        email: email.toLowerCase(),
-        password,
-        role,
-        department: undefined,
-        phone: loginType === 'USER' ? phone : undefined,
-        city: loginType === 'USER' ? city : undefined,
-      };
+        const role = loginType === 'CORPORATION' || loginType === 'WARD' ? UserRole.CORPORATION : (loginType === 'CONTRACTOR' ? UserRole.CONTRACTOR : UserRole.USER);
+        const newUser: User = {
+          id: Math.random().toString(36).substr(2, 9),
+          username,
+          email: email.toLowerCase(),
+          password,
+          role,
+          department: undefined,
+          phone: loginType === 'USER' ? phone : undefined,
+          city: loginType === 'USER' ? city : undefined,
+        };
 
-      const success = await storageService.register(newUser);
-      if (!success) {
-        setError("Registration failed. Email may already be registered.");
-        return;
+        const success = await storageService.register(newUser);
+        if (!success) {
+          setError("Registration failed. Email may already be registered.");
+          return;
+        }
+        const loggedInUser = await storageService.login(email, password);
+        if (loggedInUser) {
+          setCurrentUser(loggedInUser);
+          setError(null);
+          return;
+        }
       }
-      const loggedInUser = await storageService.login(email, password);
-      if (loggedInUser) {
-        setCurrentUser(loggedInUser);
+
+      const user = await storageService.login(email, password);
+
+      if (user) {
+        if ((user.role === UserRole.CORPORATION || user.role === UserRole.ADMIN) && (loginType !== 'CORPORATION' && loginType !== 'WARD')) {
+          setError("Restricted Access: Use Department Login.");
+          return;
+        }
+        if (user.role === UserRole.CONTRACTOR && loginType !== 'CONTRACTOR') {
+          setError("Restricted Access: Use Contractor Login.");
+          return;
+        }
+        if (user.role === UserRole.USER && loginType !== 'USER') {
+          setError("Invalid Login Portal.");
+          return;
+        }
+
+        setCurrentUser(user);
         setError(null);
-        return;
+      } else {
+        setError("Invalid credentials. Please try again.");
       }
+    } catch (err) {
+      setError("An unexpected error occurred.");
+    } finally {
+      setIsLoggingIn(false);
     }
-
-    const user = await storageService.login(email, password);
-
-    if (user) {
-      if ((user.role === UserRole.CORPORATION || user.role === UserRole.ADMIN) && (loginType !== 'CORPORATION' && loginType !== 'WARD')) {
-        setError("Restricted Access: Use Department Login.");
-        return;
-      }
-      if (user.role === UserRole.CONTRACTOR && loginType !== 'CONTRACTOR') {
-        setError("Restricted Access: Use Contractor Login.");
-        return;
-      }
-      if (user.role === UserRole.USER && loginType !== 'USER') {
-        setError("Invalid Login Portal.");
-        return;
-      }
-
-      setCurrentUser(user);
-      setError(null);
-    } else {
-      setError("Invalid credentials. Please try again.");
-    }
-  } catch (err) {
-    setError("An unexpected error occurred.");
-  } finally {
-    setIsLoggingIn(false);
-  }
   };
 
 
@@ -547,14 +547,14 @@ const App: React.FC = () => {
           {/* Emblem / Logo */}
           <div className="w-24 h-24 mb-6">
             <img
-              src="/assets/logo.png"
-              alt="Solapur Municipal Corporation Emblem"
+              src="/assets/logo.svg"
+              alt="Davanagere Municipal Corporation Emblem"
               className="w-full h-full object-contain opacity-80"
               onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
             />
           </div>
 
-          <h1 className="text-3xl font-serif font-bold text-[#1E3A8A] mb-2 text-center">Solapur Municipal Corporation</h1>
+          <h1 className="text-3xl font-serif font-bold text-[#1E3A8A] mb-2 text-center">Davanagere Municipal Corporation</h1>
           <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-8">Road Condition Monitoring System</p>
 
           <div className="w-64 h-1 bg-gray-200 rounded-full overflow-hidden">
@@ -592,7 +592,7 @@ const App: React.FC = () => {
                 {loginType === 'USER' ? 'Citizen Sign In' : (loginType === 'WARD' ? 'Ward Official Login' : (loginType === 'CONTRACTOR' ? 'Contractor Login' : 'Department Login'))}
               </h2>
               <p className="text-xs text-gray-500 uppercase font-bold tracking-wide">
-                {loginType === 'USER' ? 'Solapur Municipal Corporation' : (loginType === 'WARD' ? 'Local Ward Access' : (loginType === 'CONTRACTOR' ? 'Authorized Contractor Access' : 'Official Portal Access'))}
+                {loginType === 'USER' ? 'Davanagere Municipal Corporation' : (loginType === 'WARD' ? 'Local Ward Access' : (loginType === 'CONTRACTOR' ? 'Authorized Contractor Access' : 'Official Portal Access'))}
               </p>
             </div>
 
@@ -665,8 +665,8 @@ const App: React.FC = () => {
                   </div>
                 )}
 
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   disabled={isLoggingIn}
                   className={`w-full btn-govt-primary py-3 flex justify-center items-center ${isLoggingIn ? 'opacity-70 cursor-not-allowed' : ''}`}
                 >
