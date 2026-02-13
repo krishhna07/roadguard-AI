@@ -547,10 +547,14 @@ const App: React.FC = () => {
           {/* Emblem / Logo */}
           <div className="w-24 h-24 mb-6">
             <img
-              src="/assets/logo.png"
+              src="/assets/logo.png?v=2"
               alt="Davanagere Municipal Corporation Emblem"
-              className="w-full h-full object-contain opacity-80"
-              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+              className="w-full h-full object-contain"
+              onError={(e) => {
+                console.error("Logo load error", e);
+                // Keep distinct background if image fails
+                (e.target as HTMLImageElement).parentElement!.style.backgroundColor = '#f0f9ff';
+              }}
             />
           </div>
 
