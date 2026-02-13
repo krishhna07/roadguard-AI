@@ -237,7 +237,12 @@ def preprocess_image(image_data):
             return enhanced
         return image_data
     except Exception as e:
+        return image_data
+    except Exception as e:
         print(f"[WARN] Preprocessing failed: {e}")
+        # Ensure we return a numpy array even on failure
+        if not isinstance(image_data, np.ndarray):
+             return np.array(image_data)
         return image_data
 
 def analyze_image(image_input, image_height=1000, image_width=1000):
@@ -286,6 +291,17 @@ def analyze_image(image_input, image_height=1000, image_width=1000):
         # 3. Run inference on ENHANCED
         print(f"[DEBUG] Running model inference...")
         
+        # Ensure standard uint8 numpy array BEFORE resize
+        if not isinstance(enhanced_image, np.ndarray):
+            print(f"[WARN] enhanced_image was {type(enhanced_image)}, converting to np.array")
+            enhanced_image = np.array(enhanced_image)
+            
+        # Float images need to be converted to uint8
+        if enhanced_image.dtype != np.uint8:
+             enhanced_image = (enhanced_image * 255).astype(np.uint8) if enhanced_image.max() <= 1 else enhanced_image.astype(np.uint8)
+             
+        enhanced_image = np.ascontiguousarray(enhanced_image)
+
         # Resize for inference stability on low-RAM envs (Render Free Tier)
         infer_size = 640
         h, w = enhanced_image.shape[:2]
@@ -297,12 +313,6 @@ def analyze_image(image_input, image_height=1000, image_width=1000):
 
         # Increase confidence to 0.25 to reduce NMS load
         print(f"[DEBUG] Pre-inference check: Type={type(enhanced_image)}, Shape={enhanced_image.shape}, Dtype={enhanced_image.dtype}")
-        
-        # Ensure standard uint8 numpy array
-        if not isinstance(enhanced_image, np.ndarray):
-            enhanced_image = np.array(enhanced_image)
-            
-        enhanced_image = np.ascontiguousarray(enhanced_image, dtype=np.uint8)
         
         results = model.predict(enhanced_image, conf=0.25, imgsz=infer_size, verbose=False)
         
@@ -668,7 +678,9 @@ def analyze_video():
             # some browsers might not play it natively (they often can play mp4v in .mp4 container though).
             # OR we try avc1 inside a broad try/catch to avoid crashing the thread.
             
-            codecs_to_try = ['avc1', 'mp4v', 'h264']
+            # We prioritize mp4v for backend stability (Linux/Docker often lacks avc1 encoders)
+            # Browser support for mp4v is lower, but 'avc1' crashes the backend.
+            codecs_to_try = ['mp4v', 'avc1', 'h264']
             
             for codec in codecs_to_try:
                 try:
@@ -681,7 +693,7 @@ def analyze_video():
                     print(f"[WARN] Failed to init codec {codec}: {e}")
             
             if not out_writer or not out_writer.isOpened():
-                 print("[ERROR] Failed to open VideoWriter with all codecs.")
+                 print("[ERROR] Failed to open VideoWriter with all codecs. Video processing will continue without saving output.")
                  out_writer = None
 
         except Exception as e:
@@ -708,6 +720,12 @@ def analyze_video():
                 # Enhance for AI "Vision"
                 enhanced_frame = preprocess_image(frame_rgb)
                 
+                # Ensure numpy array
+                if not isinstance(enhanced_frame, np.ndarray):
+                    enhanced_frame = np.array(enhanced_frame)
+                
+                enhanced_frame = np.ascontiguousarray(enhanced_frame, dtype=np.uint8)
+
                 # Predict (using enhanced RGB image)
                 # Conf 0.10 for maximum sensitivity
                 results = model.predict(enhanced_frame, conf=0.10, verbose=False)
